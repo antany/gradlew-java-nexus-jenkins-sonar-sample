@@ -1,1 +1,1 @@
-podman compose up -d
+podman compose -p devenv up -d 
