@@ -1,1 +1,1 @@
-docker compose up -d
+podman compose up -d

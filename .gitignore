@@ -8,3 +8,4 @@ nexus-data
 bin
 .classpath
 .project
+jenkins-home

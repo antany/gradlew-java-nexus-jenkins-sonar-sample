@@ -8,3 +8,12 @@ services:
     environment:
       - NX_LOG_LEVEL=DEBUG
       - NX_DEBUG=true
+  jenkins:
+    user: "0:0"
+    image: docker.io/jenkins/jenkins:lts-jdk17
+    ports:
+      - "8080:8080"
+      - "50000:50000" 
+    volumes:
+      - /mnt/d/build-learnings/jenkins-home:/var/jenkins_home
+    restart: unless-stopped
