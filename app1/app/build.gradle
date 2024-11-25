@@ -1,0 +1,47 @@
+plugins {
+    id 'application'
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+
+	
+   if (project.hasProperty('profile') && project.property('profile') == 'local') {
+        repositories {
+            mavenLocal()
+            maven { 
+		   	 url 'http://localhost:8081/repository/maven-public/' 
+		     allowInsecureProtocol=true
+		   }
+		   maven { 
+		   	 url 'http://localhost:8081/repository/ant-repo/' 
+		     allowInsecureProtocol=true
+		   }
+        }
+    }else {
+	    repositories {
+	       maven { 
+		   	 url 'http://localhost:8081/repository/maven-public/' 
+		     allowInsecureProtocol=true
+		   }
+		   maven { 
+		   	 url 'http://localhost:8081/repository/ant-repo/' 
+		     allowInsecureProtocol=true
+		   }
+	    }
+	}
+
+
+dependencies {
+    implementation project(':utilities')
+    implementation 'ca.antany.lib:lib:1.0-SNAPSHOT'
+    
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
+}
+
+
+application {
+    mainClass = 'org.example.app.App'
+}

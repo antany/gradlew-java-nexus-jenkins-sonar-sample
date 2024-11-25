@@ -1,0 +1,23 @@
+pluginManagement {
+	repositories {
+        maven {
+        	url = "http://localhost:8081/repository/maven-public/"
+        	allowInsecureProtocol="true"
+        } 
+    }
+}
+
+
+dependencyResolutionManagement {
+    repositories {
+        maven {
+        	url = "http://localhost:8081/repository/maven-public/"
+        	allowInsecureProtocol="true"
+        } 
+    }
+}
+
+
+
+rootProject.name = 'ant-common'
+include('lib')

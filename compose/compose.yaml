@@ -1,0 +1,10 @@
+services:
+  nexus:
+    image: docker.io/sonatype/nexus3
+    ports:
+      - "8081:8081"
+    volumes:
+      - /mnt/d/build-learnings/nexus-data:/nexus-data
+    environment:
+      - NX_LOG_LEVEL=DEBUG
+      - NX_DEBUG=true

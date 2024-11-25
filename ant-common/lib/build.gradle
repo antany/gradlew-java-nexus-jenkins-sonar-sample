@@ -1,0 +1,43 @@
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'ca.antany.lib'
+version = '1.0-SNAPSHOT'
+
+
+dependencies {
+	testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
+}
+
+publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+        repositories {
+        	maven {
+        		def snapURL = 'http://localhost:8081/repository/ant/'
+        		def relURL = 'http://localhost:8081/repository/ant-rel/'
+        		url = version.endsWith('SNAPSHOT') ? snapURL : relURL
+        		allowInsecureProtocol=true
+        		credentials {
+                	username mavenUser
+                	password mavenPassword
+            	}
+        	}
+        }
+    }
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
