@@ -4,7 +4,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - /mnt/d/build-learnings/nexus-data:/nexus-data
+      - nexus-data:/nexus-data
     environment:
       - NX_LOG_LEVEL=DEBUG
       - NX_DEBUG=true
@@ -15,5 +15,21 @@ services:
       - "8080:8080"
       - "50000:50000" 
     volumes:
-      - /mnt/d/build-learnings/jenkins-home:/var/jenkins_home
+      - jenkins-data:/var/jenkins_home
     restart: unless-stopped
+  sonarqube:
+    image: docker.io/sonarqube:community
+    ports:
+      - 9000:9000
+    volumes:
+      - sonar-qube-data:/opt/sonarqube/data
+      - sonar-qube-extensions:/opt/sonarqube/logs
+      - sonar-qube-data:/opt/sonarqube/extensions
+
+volumes:
+  nexus-data:
+  jenkins-data:
+  sonar-qube-logs:  
+  sonar-qube-extensions:
+  sonar-qube-data:
+        

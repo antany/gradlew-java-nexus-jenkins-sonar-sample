@@ -1,1 +1,1 @@
-docker compose -p devenv down
+podman compose -p devenv down
