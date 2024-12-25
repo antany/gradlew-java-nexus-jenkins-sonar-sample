@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/antany/gradlew-java-nexus-jenkins-sonar-sample.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    dir('ant-common') {
+                        sh './gradlew build'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Archive the build artifacts
+            archiveArtifacts artifacts: '**/build/libs/*.jar', allowEmptyArchive: true
+            // Clean up the workspace
+            cleanWs()
+        }
+    }
+}
