@@ -12,6 +12,7 @@ pipeline {
             steps {
                 script {
                     dir('ant-common') {
+                        sh 'chmod +x ./gradlew'
                         sh './gradlew build'
                     }
                 }
