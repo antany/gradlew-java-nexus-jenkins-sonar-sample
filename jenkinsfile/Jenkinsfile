@@ -11,10 +11,14 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    dir('ant-common') {
-                        sh 'chmod +x ./gradlew'
-                        sh './gradlew build'
+                    withCredentials([usernamePassword(credentialsId: 'e56827e4-9c5c-4bbd-8d0d-3ef52ae8aab0', passwordVariable: 'password', usernameVariable: 'username')]) {
+                       dir('ant-common') {
+                            sh 'echo $username'
+                            sh 'chmod +x ./gradlew'
+                            sh './gradlew build -PmavenUser=$username -PmavenPassword=$password'
+                        }
                     }
+     
                 }
             }
         }
